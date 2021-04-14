@@ -38,3 +38,24 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+.idea/
+db/schema.rb
+package-lock.json
+.ruby-gemset
+.ruby-version.08.18.2020-21:25:25
+.rvmrc
+
+# Ignore Sass cache
+app/javascript/assets/styles/.sass-cache/
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+/config/credentials/
+/config/credentials.yml.enc
+/config/credentials/development.key
+/config/credentials/production.key
+/config/credentials/stagging.key
+
+/config/credentials/staging.key
+
