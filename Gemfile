@@ -31,7 +31,8 @@ gem 'bootsnap', '= 1.7.3', require: false
 gem 'react-rails', '= 2.6.1'
 # Devise gem for user authentication
 gem 'devise', '= 4.7.3'
-
+gem 'devise_token_auth', '= 1.1.5'
+gem 'omniauth', '= 1.9.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
