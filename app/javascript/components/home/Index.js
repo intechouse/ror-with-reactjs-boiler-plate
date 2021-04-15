@@ -5,7 +5,7 @@ class Index extends React.Component {
     return (
       <React.Fragment>
         <h1> Boiler Plat APP</h1>
-        <p> Boiler Plat APP</p>
+        <p> Boiler first paragraph</p>
       </React.Fragment>
     );
   }
