@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 DeviseTokenAuth.setup do |config|
+  config.change_headers_on_each_request = false
+  config.enable_standard_devise_support = true
+  # config.default_confirm_success_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url)
+  # config.default_password_reset_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)
+  # config.redirect_whitelist = [Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url), Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)]
+  config.remove_tokens_after_password_reset = true
+  config.send_confirmation_email = true
+
+  # bypass_sign_in = false
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
@@ -35,7 +44,7 @@ DeviseTokenAuth.setup do |config|
   # Uncomment to enforce current_password param to be checked before all
   # attribute updates. Set it to :password if you want it to be checked only if
   # password is updated.
-  # config.check_current_password_before_update = :attributes
+  config.check_current_password_before_update = :password
 
   # By default we will use callbacks for single omniauth.
   # It depends on fields like email, provider and uid.
@@ -52,9 +61,4 @@ DeviseTokenAuth.setup do |config|
   # If, however, you wish to integrate with legacy Devise authentication, you can
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
-
-  # By default DeviseTokenAuth will not send confirmation email, even when including
-  # devise confirmable module. If you want to use devise confirmable module and
-  # send email, set it to true. (This is a setting for compatibility)
-  # config.send_confirmation_email = true
 end
