@@ -33,6 +33,11 @@ gem 'react-rails', '= 2.6.1'
 gem 'devise', '= 4.7.3'
 gem 'devise_token_auth', '= 1.1.5'
 gem 'omniauth', '= 1.9.1'
+gem 'omniauth-google-oauth2', '= 0.8.2' # Google Login
+gem 'google-id-token', '= 1.4.2'
+gem 'omniauth-facebook', '= 8.0.0' # Facebook Login
+gem 'koala', '= 3.0.0' # To Verify Facebook Access Token
+gem 'jwt', '= 2.2.2'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -281,6 +281,8 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.omniauth :google_oauth2, Rails.application.credentials.google.dig(:client_id), Rails.application.credentials.google.dig(:client_secret)
+  config.omniauth :facebook, Rails.application.credentials.facebook.dig(:app_id), Rails.application.credentials.facebook.dig(:app_secret), callback_url: Rails.application.credentials.facebook.dig(:call_back)
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
