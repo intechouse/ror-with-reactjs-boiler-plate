@@ -46,6 +46,7 @@ package-lock.json
 .ruby-version.08.18.2020-21:25:25
 .rvmrc
 .keep
+/templates
 # Ignore Sass cache
 app/javascript/assets/styles/.sass-cache/
 
