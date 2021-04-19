@@ -1,0 +1,11 @@
+en:
+  registration:
+    already_email: "Email is already taken."
+    already_username: "Username is already taken."
+    already_phone_number: "Phone number is already taken."
+    invalid_phone_number: "Phone Number is invalid."
+    provider: "'%{provider}' is not implemented yet."
+    invalid_provider: "Cannot validate your '%{provider}' account!. Please try again later."
+  session:
+    invalid_google_user: "Cannot validate user via Google!. Please login again."
+    invalid_facebook_user: "Cannot validate user via Facebook!. Please login again."
