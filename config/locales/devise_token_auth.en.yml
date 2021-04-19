@@ -1,37 +1,11 @@
 en:
-  devise_token_auth:
-    confirmations:
-      already_confirmed: "The account associated with email '%{email}' is already verified."
-      user_not_found: "There is no account associated with email '%{email}'."
-    passwords:
-      basic_message: "If there is an account associated with the email address '%{email}', then you will receive an email with a link to reset your password."
-      account_not_confirmed: "Before reseting your password, you need to confirmed your account. The email '%{email}' associated with the account isn't confirmed yet."
   registration:
     already_email: "Email is already taken."
     already_username: "Username is already taken."
     already_phone_number: "Phone number is already taken."
     invalid_phone_number: "Phone Number is invalid."
-    user_not_present: "User is not present."
-    already_phone_number_verified: "Phone number is already verified."
-    invalid_code: "Invalid Code"
     provider: "'%{provider}' is not implemented yet."
     invalid_provider: "Cannot validate your '%{provider}' account!. Please try again later."
-    no_record_found: "No user record found"
   session:
     invalid_google_user: "Cannot validate user via Google!. Please login again."
     invalid_facebook_user: "Cannot validate user via Facebook!. Please login again."
-    invalid_instagram_user: "Cannot validate user via Instagram!. Please login again."
-    disabled_user: "Your account has been disabled! Please Contact your Administrator"
-    phone_number_verified: "Your Phone Number is not verified! You must verify your Phone Number to Login"
-  errors:
-    product_not_exist: "Product does not exist"
-    brand_not_exist: "Brand does not exist"
-    category_not_exist: "Category does not exist"
-    order_successfully: "Order is created  Successfully!"
-    order_failed: "Your order is failed please try again!"
-    user_profile_not_found: "User profile not found!"
-    user_not_exist: "User not exist!"
-    address_not_exist: "Address not exist!"
-    address_deleted: "Address deleted successfully!"
-    upload_image: "Images Uploaded Successfully!"
-    current_password_invalid: "Current Password Is Invalid"
