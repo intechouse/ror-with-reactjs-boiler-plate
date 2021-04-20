@@ -14,6 +14,7 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { freeSet } from "@coreui/icons";
 
 const Register = () => {
   return (
@@ -29,7 +30,7 @@ const Register = () => {
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
                       <CInputGroupText>
-                        <CIcon name="cil-user" />
+                        <CIcon content={freeSet.cilUser} />
                       </CInputGroupText>
                     </CInputGroupPrepend>
                     <CInput
@@ -51,7 +52,7 @@ const Register = () => {
                   <CInputGroup className="mb-3">
                     <CInputGroupPrepend>
                       <CInputGroupText>
-                        <CIcon name="cil-lock-locked" />
+                        <CIcon content={freeSet.cilLockLocked} />
                       </CInputGroupText>
                     </CInputGroupPrepend>
                     <CInput
@@ -63,7 +64,7 @@ const Register = () => {
                   <CInputGroup className="mb-4">
                     <CInputGroupPrepend>
                       <CInputGroupText>
-                        <CIcon name="cil-lock-locked" />
+                        <CIcon content={freeSet.cilLockLocked} />
                       </CInputGroupText>
                     </CInputGroupPrepend>
                     <CInput

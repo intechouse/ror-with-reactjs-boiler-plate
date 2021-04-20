@@ -4,8 +4,10 @@ import { Route, Switch } from "react-router";
 import { authenticationRoutes } from "./authenticationRoutes";
 import { unAuthenticationRoutes } from "./unAuthenticatedRoutes";
 import { authenticatedRoutes } from "./authenticatedRoutes";
+import Page404 from "../pages/Page404";
 
 const Routes = (props) => {
+  console.log("Routes: ", props);
   return (
     <Switch>
       {authenticationRoutes.map((route, id) => {
@@ -49,6 +51,7 @@ const Routes = (props) => {
           )
         );
       })}
+      <Route component={Page404} />
     </Switch>
   );
 };

@@ -15,6 +15,7 @@ import {
   CRow,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
+import { freeSet } from "@coreui/icons";
 
 const Login = (props) => {
   const loginButtonClicked = () => {
@@ -35,7 +36,7 @@ const Login = (props) => {
                     <CInputGroup className="mb-3">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-user" />
+                          <CIcon content={freeSet.cilUser} />
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
@@ -47,7 +48,7 @@ const Login = (props) => {
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
                         <CInputGroupText>
-                          <CIcon name="cil-lock-locked" />
+                          <CIcon content={freeSet.cilLockLocked} />
                         </CInputGroupText>
                       </CInputGroupPrepend>
                       <CInput
