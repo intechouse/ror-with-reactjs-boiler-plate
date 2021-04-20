@@ -8,8 +8,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: localhost
-  username: root
-  password: root
+  username: postgres
+  password: postgres
   min_messages: warning
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
