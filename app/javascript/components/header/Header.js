@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import {
   CHeader,
   CToggler,
@@ -16,22 +16,22 @@ import { freeSet } from "@coreui/icons";
 
 import TheHeaderDropdown from "./TheHeaderDropdown";
 
-const TheHeader = () => {
-  const dispatch = useDispatch();
-  const sidebarShow = useSelector((state) => state.sidebarShow);
+const TheHeader = (props) => {
+  console.log("Theheader, propes: ", props);
+  const { sidebarShow } = props;
 
   const toggleSidebar = () => {
     const val = [true, "responsive"].includes(sidebarShow)
       ? false
       : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+    props.dispatch({ type: "set", sidebarShow: val });
   };
 
   const toggleSidebarMobile = () => {
     const val = [false, "responsive"].includes(sidebarShow)
       ? true
       : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+    props.dispatch({ type: "set", sidebarShow: val });
   };
 
   return (
@@ -93,4 +93,11 @@ const TheHeader = () => {
   );
 };
 
-export default TheHeader;
+const mapStateToProps = (state) => {
+  console.log("Header, Map State to Props: ", state);
+  return {
+    sidebarShow: state.sidebar.sidebarShow,
+  };
+};
+
+export default connect(mapStateToProps)(TheHeader);
