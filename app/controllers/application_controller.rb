@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include DeviseTokenAuth::Concerns::SetUserByToken
+  # include DeviseTokenAuth::Concerns::SetUserByToken
   # Avoid CSRF Token Verification for API Requests
   protect_from_forgery with: :null_session, only: Proc.new { |c| c.request.format.json? }
   # Allow Devise Additional Parameters

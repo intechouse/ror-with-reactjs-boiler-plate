@@ -40,6 +40,7 @@ gem 'koala', '= 3.0.0' # To Verify Facebook Access Token
 gem 'jwt', '= 2.2.2'
 gem 'activeadmin', '= 2.9.0'
 gem 'cancancan', '= 3.2.1'
+gem 'friendly_id', '= 5.4.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -55,6 +56,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'pry-rails'
 end
 
 group :test do
