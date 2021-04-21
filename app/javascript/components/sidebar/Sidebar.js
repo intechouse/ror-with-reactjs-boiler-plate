@@ -16,7 +16,7 @@ import navigationItems from "./navigationItems";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
-  const show = useSelector((state) => state.sidebarShow);
+  const show = useSelector((state) => state.sidebar.sidebarShow);
 
   return (
     <CSidebar
