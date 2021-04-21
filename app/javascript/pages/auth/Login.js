@@ -31,7 +31,6 @@ const Login = (props) => {
   const onSubmit = (data) => {
     console.log(data);
   };
-
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -46,15 +45,11 @@ const Login = (props) => {
                     <CFormGroup row>
                       <CCol md="12">
                       <CInputGroup>
-                        <CInputGroupPrepend>
-                          <CInputGroupText>
-                            <CIcon name="cil-user" />
-                          </CInputGroupText>
-                        </CInputGroupPrepend>
                         <InputWithIcon
                           type="email"
                           name="email"
                           autoComplete="name"
+                          icon={freeSet.cilUser}
                           placeholder="Enter your name"
                           inputReference={register({
                             required: {
@@ -74,16 +69,12 @@ const Login = (props) => {
                     <CFormGroup row>
                       <CCol md="12">
                         <CInputGroup>
-                          <CInputGroupPrepend>
-                            <CInputGroupText>
-                              <CIcon name="cil-user" />
-                            </CInputGroupText>
-                          </CInputGroupPrepend>
                           <InputWithIcon
                             type="password"
                             name="password"
                             autoComplete="password"
                             placeholder="Enter your Password"
+                            icon={freeSet.cilLockLocked}
                             inputReference={register({
                               required: {
                                 value: true,

@@ -1,4 +1,5 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 import {
   CButton,
   CCard,
@@ -16,7 +17,16 @@ import {
 import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
 
+import InputWithIcon from "../../components/InputWithIcon";
+
 const Register = () => {
+  const { register, handleSubmit, errors } = useForm({
+    reValidateMode: "onChange",
+    shouldFocusError: true,
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -24,56 +34,86 @@ const Register = () => {
           <CCol md="9" lg="7" xl="6">
             <CCard className="mx-4">
               <CCardBody className="p-4">
-                <CForm>
+                <CForm onSubmit={handleSubmit(onSubmit)}>
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
                   <CInputGroup className="mb-3">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon content={freeSet.cilUser} />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="text"
-                      placeholder="Username"
-                      autoComplete="username"
+                    <InputWithIcon
+                      type="name"
+                      name="name"
+                      autoComplete="name"
+                      icon={freeSet.cilUser}
+                      placeholder="Enter your name"
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the userName field",
+                        },
+                      })}
+                      errorMessage={errors.name ? errors.name : null}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>@</CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
-                      type="text"
-                      placeholder="Email"
-                      autoComplete="email"
+                    <InputWithIcon
+                      type="email"
+                      name="email"
+                      autoComplete="name"
+                      icon={freeSet.cilUser}
+                      placeholder="Email address"
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the email field",
+                        },
+                        pattern: {
+                          value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                          message: "please enter valid format",
+                        },
+                      })}
+                      errorMessage={errors.email ? errors.email : null}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon content={freeSet.cilLockLocked} />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
+                    <InputWithIcon
                       type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
+                      name="password"
+                      autoComplete="password"
+                      placeholder="Enter your Password"
+                      icon={freeSet.cilLockLocked}
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the password field",
+                        },
+                        minLength: {
+                          value: 6,
+                          message: "minimum 6 character",
+                        },
+                      })}
+                      errorMessage={errors.password ? errors.password : null}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
-                    <CInputGroupPrepend>
-                      <CInputGroupText>
-                        <CIcon content={freeSet.cilLockLocked} />
-                      </CInputGroupText>
-                    </CInputGroupPrepend>
-                    <CInput
+                    <InputWithIcon
                       type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
+                      name="password2"
+                      autoComplete="password2"
+                      placeholder="confirm password"
+                      icon={freeSet.cilLockLocked}
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the confirm password",
+                        },
+                        minLength: {
+                          value: 6,
+                          message: "minimum 6 character",
+                        },
+                      })}
+                      errorMessage={errors.password2 ? errors.password2 : null}
                     />
                   </CInputGroup>
-                  <CButton color="success" block>
+                  <CButton color="success" type="submit" block>
                     Create Account
                   </CButton>
                 </CForm>

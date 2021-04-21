@@ -1,20 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  CButton,
-  CCard,
-  CCardBody,
-  CCardGroup,
-  CCol,
-  CContainer,
-  CForm,
-  CInput,
-  CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
-  CRow,
-  CFormGroup,
-} from "@coreui/react";
+import { CCol, CInputGroupPrepend, CInputGroupText } from "@coreui/react";
+import { freeSet } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
 
 const Input = (props) => {
   const { errorMessage } = props;
@@ -35,28 +23,36 @@ const Input = (props) => {
   }
   return (
     <>
+      <CInputGroupPrepend>
+        <CInputGroupText>
+          <CIcon content={props.icon} alt="Settings" />
+        </CInputGroupText>
+      </CInputGroupPrepend>
       <input
         type={props.type}
         name={props.name}
         autoComplete={props.autoComplete}
-        className={
-          "form-control " +
-          (errors ? "inputErrorBorder " : "") +
-          (props.className ? props.className : "")
-        }
+        className={errors ? "inputErrorBorder form-control" : "form-control"}
         placeholder={props.placeholder}
         ref={props.inputReference}
       />
       <CCol md="12">
-      {errors ? (
-        <p className="inputErrors">
-          <i className="fas fa-exclamation-triangle"></i> {errors}
-        </p>
-      ) : (
-        ""
-      )}
+        {errors ? (
+          <>
+            <CIcon
+              md="2"
+              className="error"
+              content={freeSet.cilWarning}
+              alt="Settings"
+            />
+            <CCol md="8" className="error">
+              {errors}
+            </CCol>
+          </>
+        ) : (
+          ""
+        )}
       </CCol>
-      
     </>
   );
 };
