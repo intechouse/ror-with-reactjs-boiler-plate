@@ -41,6 +41,7 @@ gem 'jwt', '= 2.2.2'
 gem 'activeadmin', '= 2.9.0'
 gem 'cancancan', '= 3.2.1'
 gem 'friendly_id', '= 5.4.2'
+gem 'arctic_admin', '= 3.3.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
