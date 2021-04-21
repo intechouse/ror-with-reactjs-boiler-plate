@@ -2,8 +2,9 @@ import React from "react";
 
 import Routes from "../routes";
 
-const Main = () => {
-  return <Routes />;
+const Main = (props) => {
+  console.log("Main, Props are: ", props);
+  return <Routes props />;
 };
 
 export default Main;
