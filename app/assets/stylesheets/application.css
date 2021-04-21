@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ .error{
+color: red !important;
+display: inline;
+}
+
+.inputErrorBorder, .inputErrorBorder:focus{
+    border: 1px solid red;
+    box-shadow: unset !important;
+}

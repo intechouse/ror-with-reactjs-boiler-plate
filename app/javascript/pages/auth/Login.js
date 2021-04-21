@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import {
   CButton,
   CCard,
@@ -13,15 +14,23 @@ import {
   CInputGroupPrepend,
   CInputGroupText,
   CRow,
+  CFormGroup,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
 
-const Login = (props) => {
-  const loginButtonClicked = () => {
-    props.history.push("/home");
-  };
+import InputWithIcon from "../../components/InputWithIcon";
 
+// import Register from "./Register";
+
+const Login = (props) => {
+  const { register, handleSubmit, errors } = useForm({
+    reValidateMode: "onChange",
+    shouldFocusError: true,
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+  };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -30,40 +39,62 @@ const Login = (props) => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm>
+                  <CForm onSubmit={handleSubmit(onSubmit)}>
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
-                    <CInputGroup className="mb-3">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon content={freeSet.cilUser} />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput
-                        type="text"
-                        placeholder="Username"
-                        autoComplete="username"
-                      />
-                    </CInputGroup>
-                    <CInputGroup className="mb-4">
-                      <CInputGroupPrepend>
-                        <CInputGroupText>
-                          <CIcon content={freeSet.cilLockLocked} />
-                        </CInputGroupText>
-                      </CInputGroupPrepend>
-                      <CInput
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="current-password"
-                      />
-                    </CInputGroup>
+                    <CFormGroup row>
+                      <CCol md="12">
+                      <CInputGroup>
+                        <InputWithIcon
+                          type="email"
+                          name="email"
+                          autoComplete="name"
+                          icon={freeSet.cilUser}
+                          placeholder="Enter your name"
+                          inputReference={register({
+                            required: {
+                              value: true,
+                              message: "please fill the email field",
+                            },
+                            pattern: {
+                              value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                              message: "please enter valid format",
+                            },
+                          })}
+                          errorMessage={errors.email ? errors.email : null}
+                        />
+                        </CInputGroup>
+                      </CCol>
+                    </CFormGroup>
+                    <CFormGroup row>
+                      <CCol md="12">
+                        <CInputGroup>
+                          <InputWithIcon
+                            type="password"
+                            name="password"
+                            autoComplete="password"
+                            placeholder="Enter your Password"
+                            icon={freeSet.cilLockLocked}
+                            inputReference={register({
+                              required: {
+                                value: true,
+                                message: "please fill the password field",
+                              },
+                              minLength: {
+                                value: 6,
+                                message: "minimum 6 character",
+                              },
+                            })}
+                            errorMessage={
+                              errors.password ? errors.password : null
+                            }
+                          />
+                        </CInputGroup>
+                      </CCol>
+                    </CFormGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton
-                          color="primary"
-                          className="px-4"
-                          onClick={loginButtonClicked}
-                        >
+                        <CButton color="primary" className="px-4" type="submit">
                           Login
                         </CButton>
                       </CCol>
