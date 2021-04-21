@@ -20,6 +20,11 @@ import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
 
 import InputWithIcon from "../../components/InputWithIcon";
+import Facebook from "../../components/socialsLogin/Facebook";
+import Google from "../../components/socialsLogin/Google";
+import InstaGram from "../../components/socialsLogin/InstaGram"
+
+
 
 // import Register from "./Register";
 
@@ -104,6 +109,18 @@ const Login = (props) => {
                             Forgot password?
                           </CButton>
                         </Link>
+                      </CCol>
+
+                    </CRow>
+                    <CRow className="mt-3"> 
+                      <CCol xs="4">
+                        <Facebook />
+                      </CCol>
+                      <CCol xs="4" >
+                        <Google />
+                      </CCol>
+                      <CCol xs="4" >
+                        <InstaGram />
                       </CCol>
                     </CRow>
                   </CForm>
