@@ -1,10 +1,13 @@
 import React, { Suspense } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { CContainer } from "@coreui/react";
+import { connect } from "react-redux";
 
 import Modals from "../modals/Modals";
 import Tables from "../tables/Tables";
 import DashboardContent from "./DashboardContent";
+import { isLoggedInSelector } from "../../store/selectors/authSelector";
+import { DASHBOARD, HOME, MODALS, TABLES } from "../../routes/routing";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -17,19 +20,29 @@ const Dashboard = (props) => {
     <main className="c-main">
       <CContainer fluid>
         <Suspense fallback={loading}>
-          <Switch>
-            <Route
-              path="/home/dashboard"
-              render={() => <DashboardContent {...props} />}
-            />
-            <Route path="/home/modals" render={() => <Modals {...props} />} />
-            <Route path="/home/tables" render={() => <Tables {...props} />} />
-            <Redirect from="/home" to="/home/dashboard" />
-          </Switch>
+          {props.isLoggedIn && (
+            <Switch>
+              <Route
+                path={DASHBOARD}
+                render={() => <DashboardContent {...props} />}
+              />
+              <Route path={MODALS} render={() => <Modals {...props} />} />
+              <Route path={TABLES} render={() => <Tables {...props} />} />
+              <Redirect from={HOME} to={DASHBOARD} />
+            </Switch>
+          )}
         </Suspense>
       </CContainer>
     </main>
   );
 };
 
-export default Dashboard;
+const mapStateToProps = (state) => {
+  console.log("Dashboard, Map State to Props: ", state);
+  const isLoggedIn = isLoggedInSelector(state);
+  return {
+    isLoggedIn,
+  };
+};
+
+export default connect(mapStateToProps)(Dashboard);

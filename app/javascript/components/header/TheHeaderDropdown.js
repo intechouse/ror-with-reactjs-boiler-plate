@@ -8,8 +8,22 @@ import {
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-const TheHeaderDropdown = () => {
+import { signOutUser } from "../../store/redux-token-auth-config";
+import { ROOT } from "../../routes/routing";
+
+const TheHeaderDropdown = (props) => {
+  const history = useHistory();
+
+  const signOut = (e) => {
+    e.preventDefault();
+    const { signOutUser } = props;
+    signOutUser();
+    history.replace(ROOT);
+  };
+
   return (
     <CDropdown inNav className="c-header-nav-items mx-2" direction="down">
       <CDropdownToggle className="c-header-nav-link" caret={false}>
@@ -33,7 +47,7 @@ const TheHeaderDropdown = () => {
           Settings
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem onClick={signOut}>
           <CIcon content={freeSet.cilLockLocked} className="mfe-2" />
           Logout
         </CDropdownItem>
@@ -42,4 +56,10 @@ const TheHeaderDropdown = () => {
   );
 };
 
-export default TheHeaderDropdown;
+const mapStateToProps = (state) => {
+  return {
+    state,
+  };
+};
+
+export default connect(mapStateToProps, { signOutUser })(TheHeaderDropdown);
