@@ -3,7 +3,7 @@ module Api
     module DeviseTokenAuth
       class RegistrationsController < ::DeviseTokenAuth::RegistrationsController
         skip_before_action :verify_authenticity_token
-        wrap_parameters User, include: [:name, :username, :email, :password, :password_confirmation, :avatar, :provider, :uid, :is_terms_and_policy]
+        wrap_parameters User, include: [:name, :username, :email, :password, :password_confirmation, :mobile]
 
         def check_username_availability
           if User.find_by(username: params[:username])
