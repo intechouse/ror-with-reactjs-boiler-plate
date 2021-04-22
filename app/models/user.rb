@@ -7,7 +7,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   before_validation :set_uid #, :decrypt_para
-
+  has_many_attached :profile_images
+  
   def self.verify_google_login(wc:, email:, uid:)
     begin
       validator = GoogleIDToken::Validator.new
