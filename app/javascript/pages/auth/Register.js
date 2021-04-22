@@ -19,8 +19,12 @@ import InputWithIcon from "../../components/InputWithIcon";
 import { registerUser } from "../../store/redux-token-auth-config";
 import { postRequest } from "../../services/Server";
 import { SIGNUP } from "../../services/Constants";
-import { showMessageAutoHide } from "../../director/Helpers";
-import { HOME, ROOT } from "../../routes/routing";
+import {
+  showMessageAutoHide,
+  showMessageSomethingWentWrong,
+  sweetAlertWithFailedButton,
+} from "../../director/Helpers";
+import { ROOT } from "../../routes/routing";
 
 const Register = (props) => {
   const { register, handleSubmit, errors } = useForm({
@@ -51,12 +55,25 @@ const Register = (props) => {
             result.data.status
           );
           setTimeout(() => {
-            props.history.replace(HOME);
+            props.history.replace(ROOT);
           }, 2000);
         }
       })
       .catch((error) => {
-        console.log("Sign up error", error);
+        console.log("Sign up error", error.response);
+        if (
+          error.response &&
+          error.response.status === 422 &&
+          error.response.data.errors
+        ) {
+          sweetAlertWithFailedButton(
+            "REGISTERATION FAILED",
+            "Email" + error.response.data.errors.email[0],
+            "Continue"
+          );
+        } else {
+          showMessageSomethingWentWrong();
+        }
       });
   };
   return (
@@ -162,6 +179,28 @@ const Register = (props) => {
                         errors.passwordConfirmation
                           ? errors.passwordConfirmation
                           : null
+                      }
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-4">
+                    <InputWithIcon
+                      type="tel"
+                      name="phoneNumber"
+                      autoComplete="off"
+                      placeholder="Phone Number"
+                      icon={freeSet.cilPhone}
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the Phone Number field",
+                        },
+                        pattern: {
+                          value: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+                          message: "please enter valid format",
+                        },
+                      })}
+                      errorMessage={
+                        errors.phoneNumber ? errors.phoneNumber : null
                       }
                     />
                   </CInputGroup>
