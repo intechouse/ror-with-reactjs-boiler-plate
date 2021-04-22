@@ -3,9 +3,9 @@
 DeviseTokenAuth.setup do |config|
   config.change_headers_on_each_request = false
   config.enable_standard_devise_support = true
-  # config.default_confirm_success_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url)
-  # config.default_password_reset_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)
-  # config.redirect_whitelist = [Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url), Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)]
+  config.default_confirm_success_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url)
+  config.default_password_reset_url = Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)
+  config.redirect_whitelist = [Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_confirm_success_url), Rails.application.credentials.dig(:host) + Rails.application.credentials.dig(:default_password_reset_url)]
   config.remove_tokens_after_password_reset = true
   config.send_confirmation_email = true
 
