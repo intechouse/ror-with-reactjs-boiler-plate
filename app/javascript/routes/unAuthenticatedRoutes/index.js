@@ -4,8 +4,8 @@ import loadable from "@loadable/component";
 import {
   PAGE_404,
   PAGE_500,
-  HOME,
   ROOT,
+  RESET_PASSWORD,
   RESEND_EMAIL_CONFIRMATION,
 } from "../routing";
 
@@ -15,6 +15,7 @@ const Page500 = loadable(() => import("../../pages/Page500"));
 const ResendEmailConfirmation = loadable(() =>
   import("../../pages/auth/ResendEmailConfirmation")
 );
+const ResetPassword = loadable(() => import("../../pages/auth/ResetPassword"));
 
 export const unAuthenticationRoutes = [
   {
@@ -40,5 +41,11 @@ export const unAuthenticationRoutes = [
     exact: true,
     name: "RESEND_EMAIL_CONFIRMATION",
     component: ResendEmailConfirmation,
+  },
+  {
+    path: RESET_PASSWORD,
+    exact: true,
+    name: "RESET_PASSWORD",
+    component: ResetPassword,
   },
 ];

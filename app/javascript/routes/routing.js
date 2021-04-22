@@ -8,3 +8,4 @@ export const DASHBOARD = "/home/dashboard";
 export const MODALS = "/home/modals";
 export const TABLES = "/home/tables";
 export const RESEND_EMAIL_CONFIRMATION = "/resend-email-confirmation";
+export const RESET_PASSWORD = "/reset-password";
