@@ -5,7 +5,7 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :name, :mobile, :username, :password, :password_confirmation, :profile_images => []
+  permit_params :email, :name, :mobile, :username, :password, :password_confirmation, :profile_image
 
   index do
     selectable_column
@@ -27,13 +27,9 @@ ActiveAdmin.register User do
       row :username
       row :email
       row :mobile
-      row :profile_images do
+      row :profile_image do
         div do
-          user.profile_images.each do |img|
-            div do
-              image_tag url_for(img), size: "100x100"
-            end
-          end
+          image_tag url_for(user.profile_image), size: "100x100"
         end
       end
     end
@@ -52,16 +48,16 @@ ActiveAdmin.register User do
       f.input :mobile
       f.input :password
       f.input :password_confirmation
-      f.input :profile_images, :required => false, :as => :file, input_html: {multiple: false}
+      f.input :profile_image, :required => false, :as => :file, input_html: {multiple: false}
     end
     f.actions
   end
 
-  controller do
-    def create
-      binding.pry
-    end
-  end
+  # controller do
+  #   def create
+  #     binding.pry
+  #   end
+  # end
   #
   # or
   #
