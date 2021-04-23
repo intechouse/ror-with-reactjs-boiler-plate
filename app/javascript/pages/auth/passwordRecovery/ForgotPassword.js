@@ -12,13 +12,14 @@ import {
 } from "@coreui/react";
 import { cibMailRu } from "@coreui/icons";
 
-import InputWithIcon from "../../components/InputWithIcon";
-import { postRequest } from "../../services/Server";
-import { FORGET_PASSWORD } from "../../services/Constants";
+import InputWithIcon from "../../../components/InputWithIcon";
+import { postRequest } from "../../../services/Server";
+import { FORGET_PASSWORD, WEBSITE_BASE_URL } from "../../../services/Constants";
 import {
   showMessage,
   sweetAlertWithFailedButton,
-} from "../../director/Helpers";
+} from "../../../director/Helpers";
+import { RESET_PASSWORD } from "../../../routes/routing";
 
 const ForgotPassword = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -29,7 +30,7 @@ const ForgotPassword = () => {
     console.log(data);
     const params = {
       email: data.email,
-      redirect_url: "",
+      redirect_url: WEBSITE_BASE_URL + RESET_PASSWORD,
     };
     postRequest(FORGET_PASSWORD, params)
       .then((result) => {
@@ -46,7 +47,7 @@ const ForgotPassword = () => {
           error.response.data.errors
         ) {
           sweetAlertWithFailedButton(
-            "LOGIN FAILED",
+            "PASSWORD RESET FAILED",
             error.response.data.errors[0],
             "Continue"
           );
