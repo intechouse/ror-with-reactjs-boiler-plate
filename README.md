@@ -5,7 +5,7 @@
 - Ruby version, `2.7.2`
 - Rails version, `6.1.3.1`
 - Database used, `postgresql`
-- Front used, `ReactJS`, using gem [React-Rails](https://github.com/reactjs/react-rails) with `CoreUI`.
+- Front used, `ReactJS`, using gem [React-Rails](https://github.com/reactjs/react-rails) with [CoreUI](https://coreui.io/react/docs/3.3/).
 
 ### **`ReactJS`** Application Dependencies
 
