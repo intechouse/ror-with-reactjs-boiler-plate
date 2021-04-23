@@ -11,6 +11,7 @@ import {
 import CIcon from "@coreui/icons-react";
 
 import TheHeaderDropdown from "./TheHeaderDropdown";
+import { DASHBOARD } from "../../routes/routing";
 
 const TheHeader = (props) => {
   console.log("Theheader, propes: ", props);
@@ -48,7 +49,7 @@ const TheHeader = (props) => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/home/dashboard">Dashboard</CHeaderNavLink>
+          <CHeaderNavLink to={DASHBOARD}>Dashboard</CHeaderNavLink>
         </CHeaderNavItem>
       </CHeaderNav>
 

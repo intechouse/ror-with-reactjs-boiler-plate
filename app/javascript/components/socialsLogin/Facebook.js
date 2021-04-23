@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { CButton } from "@coreui/react";
-import { FacebookLoginButton } from "react-social-login-buttons";
-import Facebook from './Facebook';
+import { cibFacebook } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
 
-function Facebook() {
+const Facebook = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setId] = useState("");
   const [name, setName] = useState("");
@@ -24,14 +24,12 @@ function Facebook() {
         appId=""
         autoLoad={true}
         fields=""
+        className="button"
         // onClick={componentClicked}
         // callback={responseFacebook}
         render={(renderProps) => (
-          <FacebookLoginButton
-            onClick={renderProps.onClick}
-          >
-            <span>Facebook</span>
-          </FacebookLoginButton>
+          <CButton  className="btn-facebook col-12 btn-brand mr-1 mb-1"><CIcon content={cibFacebook}/><span className="mfs-2">Facebook</span></CButton>
+
         )}
       />
     );

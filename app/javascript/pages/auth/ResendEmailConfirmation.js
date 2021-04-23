@@ -7,23 +7,53 @@ import {
   CCol,
   CContainer,
   CForm,
-  CInput,
   CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
   CRow,
 } from "@coreui/react";
-import { freeSet } from "@coreui/icons";
+import { cibMailRu } from "@coreui/icons";
 
 import InputWithIcon from "../../components/InputWithIcon";
+import { postRequest } from "../../services/Server";
+import { FORGET_PASSWORD, RESEND_CONFIRMATION } from "../../services/Constants";
+import {
+  showMessage,
+  sweetAlertWithFailedButton,
+} from "../../director/Helpers";
 
-const ForgotPassword = () => {
+const ResendEmailConfirmation = () => {
   const { register, handleSubmit, errors } = useForm({
     reValidateMode: "onChange",
     shouldFocusError: true,
   });
   const onSubmit = (data) => {
     console.log(data);
+
+    postRequest(RESEND_CONFIRMATION, data)
+      .then((result) => {
+        console.log("ResendEmailConfirmation, success", result);
+        if (result.data.success) {
+          showMessage(
+            "success",
+            "Email Confirmation Sent!",
+            result.data.message,
+            true
+          );
+        }
+      })
+      .catch((error) => {
+        console.log("ResendEmailConfirmation, error", error.response);
+        if (
+          error.response &&
+          error.response.status === 404 &&
+          error.response.data.errors
+        ) {
+          sweetAlertWithFailedButton(
+            "RESEND CONFIRMATION FAILED",
+            error.response.data.errors[0],
+            "Continue"
+          );
+        }
+      });
   };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -33,15 +63,15 @@ const ForgotPassword = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm onSubmit={handleSubmit(onSubmit)}>
-                  <h1>Forget Password</h1>
-                  <p className="text-muted">Reset your password</p>
+                  <h1>Resend Email Confirmation</h1>
+                  <p className="text-muted">Please Enter your Email.</p>
 
                   <CInputGroup className="mb-3">
                     <InputWithIcon
                       type="email"
                       name="email"
                       autoComplete="name"
-                      icon={freeSet.cilUser}
+                      icon={cibMailRu}
                       placeholder="Enter Email"
                       inputReference={register({
                         required: {
@@ -58,7 +88,7 @@ const ForgotPassword = () => {
                   </CInputGroup>
 
                   <CButton type="submit" color="primary" block>
-                    Reset Password
+                    Resend Email
                   </CButton>
                 </CForm>
               </CCardBody>
@@ -70,4 +100,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResendEmailConfirmation;

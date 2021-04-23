@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import GoogleLogin from "react-google-login";
 import { CButton } from "@coreui/react";
-import GoogleButton from 'react-google-button'
 
-function Google() {
+import { cibGoogle } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
+
+
+const Google=()=> {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // const responseGoogle = (response) => {
@@ -16,18 +19,12 @@ function Google() {
     googleContent = (
       <GoogleLogin
         clientId=""
-        buttonText="google"
         // onSuccess={responseGoogle}
         // onFailure={responseGoogle}
         render={(renderProps) => (
-          <CButton
-            color="success"
-            className="px-4"
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            Google
-          </CButton>
+          <CButton className="btn btn-google-plus col-12"><CIcon content={cibGoogle} /><span className="mfs-2">Google</span></CButton>
+
+            
         )}
       />
     );

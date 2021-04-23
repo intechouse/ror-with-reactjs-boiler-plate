@@ -1,28 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import InstaLogin from "react-instagram-login";
-import { CButton } from "@coreui/react";
+import { cibInstagram } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
 
 
-function InstaGram() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    // const responseInstagram = (response) => {
-    //     console.log(response);
-    //   }
-    let InstaContent;
-  if (isLoggedIn) {
-    InstaContent = null;
-  } else {
-    InstaContent = (
-      <InstaLogin
+const InstaGram = () => {
+  // const responseInstagram = (response) => {
+  //     console.log(response);
+  //   }
+  let InstaContent;
+  InstaContent = (
+    <InstaLogin
       clientId=""
-      buttonText="InstaGram"
     //   onSuccess={responseInstagram}
     //   onFailure={responseInstagram}
-    cssClass="px-4 btn btn-warning disabled"
-    
-      />
-    );
-  }
+    cssClass="insta col-12"
+    >
+      <CIcon content={cibInstagram} /><span className="mfs-2">Instagram</span>
+    </InstaLogin>
+  );
+
   return <div>{InstaContent}</div>;
 }
 

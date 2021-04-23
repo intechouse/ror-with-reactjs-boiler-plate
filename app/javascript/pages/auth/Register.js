@@ -8,24 +8,73 @@ import {
   CCol,
   CContainer,
   CForm,
-  CInput,
   CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupText,
   CRow,
 } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { freeSet } from "@coreui/icons";
+import { cibMailRu, freeSet } from "@coreui/icons";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import InputWithIcon from "../../components/InputWithIcon";
+import { registerUser } from "../../store/redux-token-auth-config";
+import { postRequest } from "../../services/Server";
+import { SIGNUP } from "../../services/Constants";
+import {
+  showMessageAutoHide,
+  showMessageSomethingWentWrong,
+  sweetAlertWithFailedButton,
+} from "../../director/Helpers";
+import { ROOT } from "../../routes/routing";
 
-const Register = () => {
+const Register = (props) => {
   const { register, handleSubmit, errors } = useForm({
     reValidateMode: "onChange",
     shouldFocusError: true,
   });
   const onSubmit = (data) => {
-    console.log(data);
+    console.log("debugging", SIGNUP, data);
+
+    const params = {
+      user: {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        password_confirmation: data.passwordConfirmation,
+        username: data.username,
+      },
+      confirm_success_url: "",
+    };
+
+    postRequest(SIGNUP, params)
+      .then((result) => {
+        console.log("Sign up success", result);
+        if (result.data.status === "success") {
+          showMessageAutoHide(
+            "success",
+            "REGISTRATION SUCCESS!",
+            result.data.status
+          );
+          setTimeout(() => {
+            props.history.replace(ROOT);
+          }, 2000);
+        }
+      })
+      .catch((error) => {
+        console.log("Sign up error", error.response);
+        if (
+          error.response &&
+          error.response.status === 422 &&
+          error.response.data.errors
+        ) {
+          sweetAlertWithFailedButton(
+            "REGISTERATION FAILED",
+            "Email" + error.response.data.errors.email[0],
+            "Continue"
+          );
+        } else {
+          showMessageSomethingWentWrong();
+        }
+      });
   };
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -33,7 +82,7 @@ const Register = () => {
         <CRow className="justify-content-center">
           <CCol md="9" lg="7" xl="6">
             <CCard className="mx-4">
-              <CCardBody className="p-4">
+              <CCardBody className="p-4 register-card-body">
                 <CForm onSubmit={handleSubmit(onSubmit)}>
                   <h1>Register</h1>
                   <p className="text-muted">Create your account</p>
@@ -55,10 +104,26 @@ const Register = () => {
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <InputWithIcon
+                      type="name"
+                      name="username"
+                      autoComplete="username"
+                      icon={freeSet.cilUser}
+                      placeholder="Enter your user name"
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the userName field",
+                        },
+                      })}
+                      errorMessage={errors.username ? errors.username : null}
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <InputWithIcon
                       type="email"
                       name="email"
                       autoComplete="name"
-                      icon={freeSet.cilUser}
+                      icon={cibMailRu}
                       placeholder="Email address"
                       inputReference={register({
                         required: {
@@ -96,8 +161,8 @@ const Register = () => {
                   <CInputGroup className="mb-4">
                     <InputWithIcon
                       type="password"
-                      name="password2"
-                      autoComplete="password2"
+                      name="passwordConfirmation"
+                      autoComplete="off"
                       placeholder="confirm password"
                       icon={freeSet.cilLockLocked}
                       inputReference={register({
@@ -110,13 +175,46 @@ const Register = () => {
                           message: "minimum 6 character",
                         },
                       })}
-                      errorMessage={errors.password2 ? errors.password2 : null}
+                      errorMessage={
+                        errors.passwordConfirmation
+                          ? errors.passwordConfirmation
+                          : null
+                      }
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-4">
+                    <InputWithIcon
+                      type="tel"
+                      name="phoneNumber"
+                      autoComplete="off"
+                      placeholder="Phone Number"
+                      icon={freeSet.cilPhone}
+                      inputReference={register({
+                        required: {
+                          value: true,
+                          message: "please fill the Phone Number field",
+                        },
+                        pattern: {
+                          value: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+                          message: "please enter valid format",
+                        },
+                      })}
+                      errorMessage={
+                        errors.phoneNumber ? errors.phoneNumber : null
+                      }
                     />
                   </CInputGroup>
                   <CButton color="success" type="submit" block>
                     Create Account
                   </CButton>
                 </CForm>
+                <CCol xs="6" className="label-for-register-form">
+                  <Link to={ROOT}>
+                    <CButton color="link" className="px-0">
+                      Already Have An Account?
+                    </CButton>
+                  </Link>
+                </CCol>
               </CCardBody>
               <CCardFooter className="p-4">
                 <CRow>
@@ -140,4 +238,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect(null, { registerUser })(Register);

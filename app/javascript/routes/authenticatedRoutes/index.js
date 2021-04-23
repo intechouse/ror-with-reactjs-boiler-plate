@@ -1,4 +1,15 @@
 import React from "react";
 import loadable from "@loadable/component";
 
-export const authenticatedRoutes = [];
+import { HOME } from "../routing";
+
+const Home = loadable(() => import("../../pages/Home"));
+
+export const authenticatedRoutes = [
+  {
+    path: HOME,
+    exact: false,
+    name: "HOME",
+    component: Home,
+  },
+];

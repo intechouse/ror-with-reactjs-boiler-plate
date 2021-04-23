@@ -4,7 +4,7 @@ import loadable from "@loadable/component";
 import { FORGOT_PASSWORD, REGISTERATION } from "../routing";
 
 const ForgotPassword = loadable(() =>
-  import("../../pages/auth/ForgotPassword")
+  import("../../pages/auth/passwordRecovery/ForgotPassword")
 );
 
 const Register = loadable(() => import("../../pages/auth/Register"));
