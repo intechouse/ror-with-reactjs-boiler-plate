@@ -52,11 +52,12 @@ app/javascript/assets/styles/.sass-cache/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-/config/credentials/
 /config/credentials.yml.enc
 /config/credentials/development.key
+/config/credentials/development.yml.enc
 /config/credentials/production.key
+/config/credentials/production.yml.enc
 /config/credentials/stagging.key
+/config/credentials/stagging.yml.enc
 
-/config/credentials/staging.key
 
