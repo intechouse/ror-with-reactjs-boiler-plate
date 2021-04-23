@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { connect } from 'react-redux';
 import {
   CButton,
   CCard,
@@ -12,56 +12,63 @@ import {
   CForm,
   CInputGroup,
   CRow,
-  CFormGroup,
-} from "@coreui/react";
-import { cibMailRu, freeSet } from "@coreui/icons";
+  CFormGroup
+} from '@coreui/react';
+import { cibMailRu, freeSet } from '@coreui/icons';
+import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from "../../components/InputWithIcon";
-import { signInUser } from "../../store/redux-token-auth-config";
+import InputWithIcon from '../../components/InputWithIcon';
+import { signInUser } from '../../store/redux-token-auth-config';
 import {
   isLoggedInSelector,
-  getCurrentUser,
-} from "../../store/selectors/authSelector";
+  getCurrentUser
+} from '../../store/selectors/authSelector';
 import {
   showMessageAutoHide,
-  sweetAlertWithFailedButton,
-} from "../../director/Helpers";
+  sweetAlertWithFailedButton
+} from '../../director/Helpers';
 import {
   FORGOT_PASSWORD,
   HOME,
   REGISTERATION,
-  RESEND_EMAIL_CONFIRMATION,
-} from "../../routes/routing";
+  RESEND_EMAIL_CONFIRMATION
+} from '../../routes/routing';
 
 const Login = (props) => {
-  console.log("Login props", props);
+  console.log('Login props', props);
   const { signInUser, isSignedIn, currentUser } = props;
   const { register, handleSubmit, errors } = useForm({
-    reValidateMode: "onChange",
-    shouldFocusError: true,
+    reValidateMode: 'onChange',
+    shouldFocusError: true
   });
+  const [loading, setLoading] = useState('');
+
   const onSubmit = (data) => {
     console.log(data);
 
+    setLoading('loading');
     signInUser(data)
       .then((result) => {
-        console.log("Login success", result, isSignedIn, currentUser);
-        showMessageAutoHide("success", "LOGIN SUCCESS!", "Login Success");
+        console.log('Login success', result, isSignedIn, currentUser);
+
+        setLoading('finished');
+        showMessageAutoHide('success', 'LOGIN SUCCESS!', 'Login Success');
         setTimeout(() => {
           props.history.replace(HOME);
         }, 1000);
       })
       .catch((error) => {
-        console.log("Login error", error.response, isSignedIn, currentUser);
+        console.log('Login error', error.response, isSignedIn, currentUser);
+        setLoading('');
         if (
           error.response &&
           error.response.status === 401 &&
           error.response.data.errors
         ) {
           sweetAlertWithFailedButton(
-            "LOGIN FAILED",
+            'LOGIN FAILED',
             error.response.data.errors[0],
-            "Continue"
+            'Continue'
           );
         }
       });
@@ -89,14 +96,15 @@ const Login = (props) => {
                             inputReference={register({
                               required: {
                                 value: true,
-                                message: "please fill the email field",
+                                message: 'please fill the email field'
                               },
                               pattern: {
                                 value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                                message: "please enter valid format",
-                              },
+                                message: 'please enter valid format'
+                              }
                             })}
                             errorMessage={errors.email ? errors.email : null}
+                            isDisabled={loading}
                           />
                         </CInputGroup>
                       </CCol>
@@ -113,27 +121,30 @@ const Login = (props) => {
                             inputReference={register({
                               required: {
                                 value: true,
-                                message: "please fill the password field",
+                                message: 'please fill the password field'
                               },
                               minLength: {
                                 value: 6,
-                                message: "minimum 6 character",
-                              },
+                                message: 'minimum 6 character'
+                              }
                             })}
                             errorMessage={
                               errors.password ? errors.password : null
                             }
+                            isDisabled={loading}
                           />
                         </CInputGroup>
                       </CCol>
                     </CFormGroup>
-                    <CRow>
-                      <CCol xs="12" className="text-center">
-                        <CButton color="primary" className="px-4" type="submit">
-                          Login
-                        </CButton>
-                      </CCol>
-                    </CRow>
+                    <div>
+                      <Button
+                        state={loading}
+                        className="button-primary-color w-100"
+                        type="submit"
+                      >
+                        Login
+                      </Button>
+                    </div>
                     <CRow>
                       <CCol xs="12" className="mt-2">
                         <Link to={FORGOT_PASSWORD}>
@@ -156,7 +167,7 @@ const Login = (props) => {
               </CCard>
               <CCard
                 className="text-white bg-primary py-5 d-md-down-none"
-                style={{ width: "44%" }}
+                style={{ width: '44%' }}
               >
                 <CCardBody className="text-center">
                   <div>
@@ -193,7 +204,7 @@ const mapStateToProps = (state) => {
   return {
     state,
     isSignedIn,
-    currentUser,
+    currentUser
   };
 };
 

@@ -31,3 +31,16 @@
 .label-for-register-form {
   padding: 0px !important;
 }
+
+.button-primary-color {
+  background-color: #321fdb !important;
+  border-color: #321fdb !important;
+}
+
+.button-spacer {
+  padding-left: 15px;
+}
+
+.react-button-loaders__loading {
+  transform: scaleX(0.5) !important;
+}

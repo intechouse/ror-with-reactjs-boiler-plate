@@ -15,6 +15,8 @@ module.exports = {
   rules: {
     semi: ['error', 'always'],
     quotes: ['error', 'single'],
-    'eol-last': ['error', 'always']
+    'eol-last': ['error', 'always'],
+    'react/prop-types': 0,
+    indent: ['error', 2]
   }
 };
