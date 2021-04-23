@@ -13,12 +13,21 @@
  *= require_tree .
  *= require_self
  */
- .error{
-color: red !important;
-display: inline;
+.error {
+  color: red !important;
+  display: inline;
 }
 
-.inputErrorBorder, .inputErrorBorder:focus{
-    border: 1px solid red;
-    box-shadow: unset !important;
+.inputErrorBorder,
+.inputErrorBorder:focus {
+  border: 1px solid red;
+  box-shadow: unset !important;
+}
+
+.register-card-body {
+  padding-bottom: 5px !important;
+}
+
+.label-for-register-form {
+  padding: 0px !important;
 }

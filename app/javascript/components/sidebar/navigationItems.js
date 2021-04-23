@@ -2,11 +2,19 @@ import React from "react";
 import CIcon from "@coreui/icons-react";
 import { freeSet } from "@coreui/icons";
 
+import {
+  DASHBOARD,
+  MODALS,
+  PAGE_404,
+  PAGE_500,
+  TABLES,
+} from "../../routes/routing";
+
 const navigationItems = [
   {
     _tag: "CSidebarNavItem",
     name: "Dashboard",
-    to: "/home/dashboard",
+    to: DASHBOARD,
     icon: (
       <CIcon
         content={freeSet.cilSpeedometer}
@@ -17,7 +25,7 @@ const navigationItems = [
   {
     _tag: "CSidebarNavItem",
     name: "Tables",
-    to: "/home/tables",
+    to: TABLES,
     icon: (
       <CIcon content={freeSet.cilChart} customClasses="c-sidebar-nav-icon" />
     ),
@@ -25,7 +33,7 @@ const navigationItems = [
   {
     _tag: "CSidebarNavItem",
     name: "Modal",
-    to: "/home/modals",
+    to: MODALS,
     icon: (
       <CIcon content={freeSet.cilBell} customClasses="c-sidebar-nav-icon" />
     ),
@@ -33,7 +41,7 @@ const navigationItems = [
   {
     _tag: "CSidebarNavItem",
     name: "Error 404",
-    to: "/page404",
+    to: PAGE_404,
     icon: (
       <CIcon content={freeSet.cilWarning} customClasses="c-sidebar-nav-icon" />
     ),
@@ -41,7 +49,7 @@ const navigationItems = [
   {
     _tag: "CSidebarNavItem",
     name: "Error 500",
-    to: "/page500",
+    to: PAGE_500,
     icon: (
       <CIcon content={freeSet.cilWarning} customClasses="c-sidebar-nav-icon" />
     ),

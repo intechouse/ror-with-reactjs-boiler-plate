@@ -14,39 +14,41 @@ import { cibMailRu } from "@coreui/icons";
 
 import InputWithIcon from "../../components/InputWithIcon";
 import { postRequest } from "../../services/Server";
-import { FORGET_PASSWORD } from "../../services/Constants";
+import { FORGET_PASSWORD, RESEND_CONFIRMATION } from "../../services/Constants";
 import {
   showMessage,
   sweetAlertWithFailedButton,
 } from "../../director/Helpers";
 
-const ForgotPassword = () => {
+const ResendEmailConfirmation = () => {
   const { register, handleSubmit, errors } = useForm({
     reValidateMode: "onChange",
     shouldFocusError: true,
   });
   const onSubmit = (data) => {
     console.log(data);
-    const params = {
-      email: data.email,
-      redirect_url: "",
-    };
-    postRequest(FORGET_PASSWORD, params)
+
+    postRequest(RESEND_CONFIRMATION, data)
       .then((result) => {
-        console.log("Forgot Passord, success", result);
+        console.log("ResendEmailConfirmation, success", result);
         if (result.data.success) {
-          showMessage("success", "PASSWORD RESET!", result.data.message, true);
+          showMessage(
+            "success",
+            "Email Confirmation Sent!",
+            result.data.message,
+            true
+          );
         }
       })
       .catch((error) => {
-        console.log("Forgot Passord, error", error.response);
+        console.log("ResendEmailConfirmation, error", error.response);
         if (
           error.response &&
           error.response.status === 404 &&
           error.response.data.errors
         ) {
           sweetAlertWithFailedButton(
-            "LOGIN FAILED",
+            "RESEND CONFIRMATION FAILED",
             error.response.data.errors[0],
             "Continue"
           );
@@ -61,8 +63,8 @@ const ForgotPassword = () => {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm onSubmit={handleSubmit(onSubmit)}>
-                  <h1>Forget Password</h1>
-                  <p className="text-muted">Reset your password</p>
+                  <h1>Resend Email Confirmation</h1>
+                  <p className="text-muted">Please Enter your Email.</p>
 
                   <CInputGroup className="mb-3">
                     <InputWithIcon
@@ -86,7 +88,7 @@ const ForgotPassword = () => {
                   </CInputGroup>
 
                   <CButton type="submit" color="primary" block>
-                    Reset Password
+                    Resend Email
                   </CButton>
                 </CForm>
               </CCardBody>
@@ -98,4 +100,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResendEmailConfirmation;
