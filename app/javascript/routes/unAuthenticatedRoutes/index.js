@@ -15,7 +15,9 @@ const Page500 = loadable(() => import("../../pages/Page500"));
 const ResendEmailConfirmation = loadable(() =>
   import("../../pages/auth/ResendEmailConfirmation")
 );
-const ResetPassword = loadable(() => import("../../pages/auth/ResetPassword"));
+const ResetPassword = loadable(() =>
+  import("../../pages/auth/passwordRecovery/ResetPassword")
+);
 
 export const unAuthenticationRoutes = [
   {
