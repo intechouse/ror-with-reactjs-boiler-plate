@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   CButton,
   CCol,
@@ -8,13 +8,13 @@ import {
   CInputGroupAppend,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow,
-} from "@coreui/react";
-import CIcon from "@coreui/icons-react";
-import { freeSet } from "@coreui/icons";
+  CRow
+} from '@coreui/react';
+import CIcon from '@coreui/icons-react';
+import { freeSet } from '@coreui/icons';
 
 const Page500 = (props) => {
-  console.log("page 500 props", props);
+  console.log('page 500 props', props);
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>

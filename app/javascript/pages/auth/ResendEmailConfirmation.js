@@ -1,5 +1,5 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import {
   CButton,
   CCard,
@@ -8,49 +8,49 @@ import {
   CContainer,
   CForm,
   CInputGroup,
-  CRow,
-} from "@coreui/react";
-import { cibMailRu } from "@coreui/icons";
+  CRow
+} from '@coreui/react';
+import { cibMailRu } from '@coreui/icons';
 
-import InputWithIcon from "../../components/InputWithIcon";
-import { postRequest } from "../../services/Server";
-import { FORGET_PASSWORD, RESEND_CONFIRMATION } from "../../services/Constants";
+import InputWithIcon from '../../components/InputWithIcon';
+import { postRequest } from '../../services/Server';
+import { RESEND_CONFIRMATION } from '../../services/Constants';
 import {
   showMessage,
-  sweetAlertWithFailedButton,
-} from "../../director/Helpers";
+  sweetAlertWithFailedButton
+} from '../../director/Helpers';
 
 const ResendEmailConfirmation = () => {
   const { register, handleSubmit, errors } = useForm({
-    reValidateMode: "onChange",
-    shouldFocusError: true,
+    reValidateMode: 'onChange',
+    shouldFocusError: true
   });
   const onSubmit = (data) => {
     console.log(data);
 
     postRequest(RESEND_CONFIRMATION, data)
       .then((result) => {
-        console.log("ResendEmailConfirmation, success", result);
+        console.log('ResendEmailConfirmation, success', result);
         if (result.data.success) {
           showMessage(
-            "success",
-            "Email Confirmation Sent!",
+            'success',
+            'Email Confirmation Sent!',
             result.data.message,
             true
           );
         }
       })
       .catch((error) => {
-        console.log("ResendEmailConfirmation, error", error.response);
+        console.log('ResendEmailConfirmation, error', error.response);
         if (
           error.response &&
           error.response.status === 404 &&
           error.response.data.errors
         ) {
           sweetAlertWithFailedButton(
-            "RESEND CONFIRMATION FAILED",
+            'RESEND CONFIRMATION FAILED',
             error.response.data.errors[0],
-            "Continue"
+            'Continue'
           );
         }
       });
@@ -76,12 +76,12 @@ const ResendEmailConfirmation = () => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the email field",
+                          message: 'please fill the email field'
                         },
                         pattern: {
                           value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                          message: "please enter valid format",
-                        },
+                          message: 'please enter valid format'
+                        }
                       })}
                       errorMessage={errors.email ? errors.email : null}
                     />
