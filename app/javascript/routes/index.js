@@ -1,15 +1,15 @@
-import React from "react";
-import { Route, Switch } from "react-router";
-import { connect } from "react-redux";
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import { connect } from 'react-redux';
 
-import { authenticationRoutes } from "./authenticationRoutes";
-import { unAuthenticationRoutes } from "./unAuthenticatedRoutes";
-import { authenticatedRoutes } from "./authenticatedRoutes";
-import Page404 from "../pages/Page404";
-import { isLoggedInSelector } from "../store/selectors/authSelector";
+import { authenticationRoutes } from './authenticationRoutes';
+import { unAuthenticationRoutes } from './unAuthenticatedRoutes';
+import { authenticatedRoutes } from './authenticatedRoutes';
+import Page404 from '../pages/Page404';
+import { isLoggedInSelector } from '../store/selectors/authSelector';
 
 const Routes = (props) => {
-  console.log("Routes: ", props);
+  console.log('Routes: ', props);
   return (
     <Switch>
       {unAuthenticationRoutes.map((route, id) => {
@@ -61,10 +61,10 @@ const Routes = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log("Routes, Map State to Props: ", state);
+  console.log('Routes, Map State to Props: ', state);
   const isLoggedIn = isLoggedInSelector(state);
   return {
-    isLoggedIn,
+    isLoggedIn
   };
 };
 

@@ -77,12 +77,20 @@ const ForgotPassword = (props) => {
       .catch((error) => {
         console.log('Forgot Passord, error', error.response);
         setLoading('');
-        if (error.status === 422 && error.data && error.data.errors) {
-          sweetAlertWithFailedButton(
-            'PASSWORD RESET FAILED',
-            error.data.errors[0],
-            'Continue'
-          );
+        if (error.response.status === 422 && error.response.data && error.response.data.errors) {
+          if (error.response.data.errors.full_messages) {
+            sweetAlertWithFailedButton(
+              'PASSWORD RESET FAILED',
+              error.response.data.errors.full_messages[0],
+              'Continue'
+            );
+          } else {
+            sweetAlertWithFailedButton(
+              'PASSWORD RESET FAILED',
+              error.response.data.errors[0],
+              'Continue'
+            );
+          }
         }
       });
   };
