@@ -7,7 +7,7 @@ module Api
 
         def check_username_availability
           if User.find_by(username: params[:username])
-            render json: {success: false, errors: I18n.t('registration.already_username')} and return
+            render json: {success: false, errors: I18n.t('devise_token_auth.registration.already_username')} and return
           else
             render json: {success: true} and return
           end
@@ -15,7 +15,7 @@ module Api
 
         def check_email_availability
           if User.find_by(email: params[:email])
-            render json: {success: false, errors: I18n.t('registration.already_email')} and return
+            render json: {success: false, errors: I18n.t('devise_token_auth.registration.already_email')} and return
           else
             render json: {success: true} and return
           end
@@ -23,7 +23,7 @@ module Api
 
         def check_mobile_availability
           if User.find_by(mobile: params[:mobile])
-            render json: {success: false, errors: I18n.t('registration.already_phone_number')} and return
+            render json: {success: false, errors: I18n.t('devise_token_auth.registration.already_phone_number')} and return
           else
             render json: {success: true} and return
           end
@@ -36,7 +36,7 @@ module Api
           elsif params[:provider] == 'facebook'
             isValid = User.verify_facebook_login(access_token: params[:access_token], uid: params[:uid])
            else
-            render json: {status: 'error', error: I18n.t('registration.provider', provider: params[:provider])}, status: 401 and return
+            render json: {status: 'error', error: I18n.t('devise_token_auth.registration.provider', provider: params[:provider])}, status: 401 and return
           end
           if isValid
             @user = User.new(sign_up_params)
@@ -46,10 +46,9 @@ module Api
               render json: {status: 'error', errors: @user.errors}, status: 422
             end
           else
-            render json: {status: 'error', error: I18n.t('registration.invalid_provider', provider: params[:provider])}, status: 401
+            render json: {status: 'error', error: I18n.t('devise_token_auth.registration.invalid_provider', provider: params[:provider])}, status: 401
           end
         end
-
         private
 
         def sign_up_params
