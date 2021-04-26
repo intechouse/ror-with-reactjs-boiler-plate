@@ -12,13 +12,17 @@ import {
 import { cibMailRu } from '@coreui/icons';
 import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from '../../components/InputWithIcon';
-import { postRequest } from '../../services/Server';
-import { RESEND_CONFIRMATION } from '../../services/Constants';
+import InputWithIcon from '../../../components/InputWithIcon';
+import { postRequest } from '../../../services/Server';
+import {
+  RESEND_CONFIRMATION,
+  WEBSITE_BASE_URL
+} from '../../../services/Constants';
 import {
   showMessage,
   sweetAlertWithFailedButton
-} from '../../director/Helpers';
+} from '../../../director/Helpers';
+import { EMAIL_CONFIRMATION_REQUEST } from '../../../routes/routing';
 
 const ResendEmailConfirmation = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -28,6 +32,7 @@ const ResendEmailConfirmation = () => {
   const [loading, setLoading] = useState('');
 
   const onSubmit = (data) => {
+    data.redirect_url = WEBSITE_BASE_URL + EMAIL_CONFIRMATION_REQUEST;
     console.log(data);
 
     setLoading('loading');
@@ -99,7 +104,7 @@ const ResendEmailConfirmation = () => {
                       className="button-primary-color w-100"
                       type="submit"
                     >
-                    Resend Email
+                      Resend Email
                     </Button>
                   </div>
                 </CForm>

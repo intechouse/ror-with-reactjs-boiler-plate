@@ -1,82 +1,96 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import {
-  CButton,
   CCard,
   CCardBody,
   CCol,
   CContainer,
   CForm,
   CInputGroup,
-  CRow,
-} from "@coreui/react";
-import { freeSet } from "@coreui/icons";
+  CRow
+} from '@coreui/react';
+import { freeSet } from '@coreui/icons';
+import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from "../../../components/InputWithIcon";
-import { putRequest } from "../../../services/Server";
-import { RESET_PASSWORD } from "../../../services/Constants";
+import InputWithIcon from '../../../components/InputWithIcon';
+import { putRequest } from '../../../services/Server';
+import { RESET_PASSWORD } from '../../../services/Constants';
 import {
   showMessage,
   showMessageSomethingWentWrong,
-  sweetAlertWithFailedButton,
-} from "../../../director/Helpers";
-import { ROOT } from "../../../routes/routing";
+  sweetAlertWithFailedButton
+} from '../../../director/Helpers';
+import { ROOT } from '../../../routes/routing';
 
 const ForgotPassword = (props) => {
-  console.log("ResetPassword Props are", props);
+  console.log('ResetPassword Props are', props);
+  const [loading, setLoading] = useState('');
+
   const { location } = props;
-  console.log("ResetPassword, Location is: ", location);
+  console.log('ResetPassword, Location is: ', location);
   console.log(
-    "ResetPassword, Location is: ",
+    'ResetPassword, Location is: ',
     decodeURIComponent(location.search)
   );
 
   const params = new Map(
     decodeURIComponent(location.search)
       .slice(1)
-      .split("&")
-      .map((kv) => kv.split("="))
+      .split('&')
+      .map((kv) => kv.split('='))
   );
-  console.log("ResetPassword, Params are: ", params);
+  console.log('ResetPassword, Params are: ', params);
 
   const { register, handleSubmit, errors } = useForm({
-    reValidateMode: "onChange",
-    shouldFocusError: true,
+    reValidateMode: 'onChange',
+    shouldFocusError: true
   });
   const onSubmit = (data) => {
     const headers = {
-      "Content-Type": "application/json",
-      "access-token": params.get("access-token"),
-      client: params.get("client"),
-      client_id: params.get("client_id"),
-      token: params.get("token"),
-      uid: params.get("uid"),
+      'Content-Type': 'application/json',
+      'access-token': params.get('access-token'),
+      client: params.get('client'),
+      client_id: params.get('client_id'),
+      token: params.get('token'),
+      uid: params.get('uid')
     };
-    console.log("ResetPassword, Data is: ", data);
-    console.log("ResetPassword, Headers are: ", headers);
+    console.log('ResetPassword, Data is: ', data);
+    console.log('ResetPassword, Headers are: ', headers);
 
+    setLoading('loading');
     putRequest(RESET_PASSWORD, data, headers)
       .then((result) => {
-        console.log("Forgot Passord, success", result);
+        console.log('Forgot Passord, success', result);
+
+        setLoading('finished');
         if (
           result.status === 200 &&
           result.data.success &&
           result.data.message
         ) {
-          showMessage("success", "PASSWORD RESET!", result.data.message, true);
+          showMessage('success', 'PASSWORD RESET!', result.data.message, true);
           props.history.replace(ROOT);
         } else {
           showMessageSomethingWentWrong();
         }
       })
       .catch((error) => {
-        console.log("Forgot Passord, error", error.response);
-        if (error.status === 422 && error.data && error.data.errors) {
-          sweetAlertWithFailedButton(
-            "PASSWORD RESET FAILED",
-            error.data.errors[0],
-            "Continue"
-          );
+        console.log('Forgot Passord, error', error.response);
+        setLoading('');
+        if (error.response.status === 422 && error.response.data && error.response.data.errors) {
+          if (error.response.data.errors.full_messages) {
+            sweetAlertWithFailedButton(
+              'PASSWORD RESET FAILED',
+              error.response.data.errors.full_messages[0],
+              'Continue'
+            );
+          } else {
+            sweetAlertWithFailedButton(
+              'PASSWORD RESET FAILED',
+              error.response.data.errors[0],
+              'Continue'
+            );
+          }
         }
       });
   };
@@ -101,14 +115,15 @@ const ForgotPassword = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the password field",
+                          message: 'please fill the password field'
                         },
                         minLength: {
                           value: 6,
-                          message: "minimum 6 character",
-                        },
+                          message: 'minimum 6 character'
+                        }
                       })}
                       errorMessage={errors.password ? errors.password : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
@@ -121,12 +136,12 @@ const ForgotPassword = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the confirm password",
+                          message: 'please fill the confirm password'
                         },
                         minLength: {
                           value: 6,
-                          message: "minimum 6 character",
-                        },
+                          message: 'minimum 6 character'
+                        }
                       })}
                       errorMessage={
                         errors.password_confirmation
@@ -136,9 +151,15 @@ const ForgotPassword = (props) => {
                     />
                   </CInputGroup>
 
-                  <CButton type="submit" color="primary" block>
-                    Reset Password
-                  </CButton>
+                  <div>
+                    <Button
+                      state={loading}
+                      className="button-primary-color w-100"
+                      type="submit"
+                    >
+                      Reset Password
+                    </Button>
+                  </div>
                 </CForm>
               </CCardBody>
             </CCard>

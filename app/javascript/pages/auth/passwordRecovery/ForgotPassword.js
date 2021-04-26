@@ -1,55 +1,62 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import {
-  CButton,
   CCard,
   CCardBody,
   CCol,
   CContainer,
   CForm,
   CInputGroup,
-  CRow,
-} from "@coreui/react";
-import { cibMailRu } from "@coreui/icons";
+  CRow
+} from '@coreui/react';
+import { cibMailRu } from '@coreui/icons';
+import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from "../../../components/InputWithIcon";
-import { postRequest } from "../../../services/Server";
-import { FORGET_PASSWORD, WEBSITE_BASE_URL } from "../../../services/Constants";
+import InputWithIcon from '../../../components/InputWithIcon';
+import { postRequest } from '../../../services/Server';
+import { FORGET_PASSWORD, WEBSITE_BASE_URL } from '../../../services/Constants';
 import {
   showMessage,
-  sweetAlertWithFailedButton,
-} from "../../../director/Helpers";
-import { RESET_PASSWORD } from "../../../routes/routing";
+  sweetAlertWithFailedButton
+} from '../../../director/Helpers';
+import { RESET_PASSWORD } from '../../../routes/routing';
 
 const ForgotPassword = () => {
   const { register, handleSubmit, errors } = useForm({
-    reValidateMode: "onChange",
-    shouldFocusError: true,
+    reValidateMode: 'onChange',
+    shouldFocusError: true
   });
+  const [loading, setLoading] = useState('');
+
   const onSubmit = (data) => {
     console.log(data);
     const params = {
       email: data.email,
-      redirect_url: WEBSITE_BASE_URL + RESET_PASSWORD,
+      redirect_url: WEBSITE_BASE_URL + RESET_PASSWORD
     };
+
+    setLoading('loading');
     postRequest(FORGET_PASSWORD, params)
       .then((result) => {
-        console.log("Forgot Passord, success", result);
+        console.log('Forgot Passord, success', result);
+
+        setLoading('finished');
         if (result.data.success) {
-          showMessage("success", "PASSWORD RESET!", result.data.message, true);
+          showMessage('success', 'PASSWORD RESET!', result.data.message, true);
         }
       })
       .catch((error) => {
-        console.log("Forgot Passord, error", error.response);
+        console.log('Forgot Passord, error', error.response);
+        setLoading('');
         if (
           error.response &&
           error.response.status === 404 &&
           error.response.data.errors
         ) {
           sweetAlertWithFailedButton(
-            "PASSWORD RESET FAILED",
+            'PASSWORD RESET FAILED',
             error.response.data.errors[0],
-            "Continue"
+            'Continue'
           );
         }
       });
@@ -75,20 +82,27 @@ const ForgotPassword = () => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the email field",
+                          message: 'please fill the email field'
                         },
                         pattern: {
                           value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                          message: "please enter valid format",
-                        },
+                          message: 'please enter valid format'
+                        }
                       })}
                       errorMessage={errors.email ? errors.email : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
 
-                  <CButton type="submit" color="primary" block>
+                  <div>
+                    <Button
+                      state={loading}
+                      className="button-primary-color w-100"
+                      type="submit"
+                    >
                     Reset Password
-                  </CButton>
+                    </Button>
+                  </div>
                 </CForm>
               </CCardBody>
             </CCard>

@@ -1,5 +1,5 @@
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import {
   CButton,
   CCard,
@@ -9,30 +9,33 @@ import {
   CContainer,
   CForm,
   CInputGroup,
-  CRow,
-} from "@coreui/react";
-import { cibMailRu, freeSet } from "@coreui/icons";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+  CRow
+} from '@coreui/react';
+import { cibMailRu, freeSet } from '@coreui/icons';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from "../../components/InputWithIcon";
-import { registerUser } from "../../store/redux-token-auth-config";
-import { postRequest } from "../../services/Server";
-import { SIGNUP } from "../../services/Constants";
+import InputWithIcon from '../../components/InputWithIcon';
+import { registerUser } from '../../store/redux-token-auth-config';
+import { postRequest } from '../../services/Server';
+import { SIGNUP, WEBSITE_BASE_URL } from '../../services/Constants';
 import {
   showMessageAutoHide,
   showMessageSomethingWentWrong,
-  sweetAlertWithFailedButton,
-} from "../../director/Helpers";
-import { ROOT } from "../../routes/routing";
+  sweetAlertWithFailedButton
+} from '../../director/Helpers';
+import { EMAIL_CONFIRMATION_REQUEST, ROOT } from '../../routes/routing';
 
 const Register = (props) => {
   const { register, handleSubmit, errors } = useForm({
-    reValidateMode: "onChange",
-    shouldFocusError: true,
+    reValidateMode: 'onChange',
+    shouldFocusError: true
   });
+  const [loading, setLoading] = useState('');
+
   const onSubmit = (data) => {
-    console.log("debugging", SIGNUP, data);
+    console.log('debugging', SIGNUP, data);
 
     const params = {
       user: {
@@ -41,17 +44,19 @@ const Register = (props) => {
         password: data.password,
         password_confirmation: data.passwordConfirmation,
         username: data.username,
+        mobile: data.phoneNumber
       },
-      confirm_success_url: "",
+      confirm_success_url: WEBSITE_BASE_URL + EMAIL_CONFIRMATION_REQUEST
     };
+    setLoading('loading');
 
     postRequest(SIGNUP, params)
       .then((result) => {
-        console.log("Sign up success", result);
-        if (result.data.status === "success") {
+        console.log('Sign up success', result);
+        if (result.data.status === 'success') {
           showMessageAutoHide(
-            "success",
-            "REGISTRATION SUCCESS!",
+            'success',
+            'REGISTRATION SUCCESS!',
             result.data.status
           );
           setTimeout(() => {
@@ -60,16 +65,18 @@ const Register = (props) => {
         }
       })
       .catch((error) => {
-        console.log("Sign up error", error.response);
+        console.log('Sign up error', error.response);
+        setLoading('');
         if (
           error.response &&
           error.response.status === 422 &&
-          error.response.data.errors
+          error.response.data.errors &&
+          error.response.data.errors.email
         ) {
           sweetAlertWithFailedButton(
-            "REGISTERATION FAILED",
-            "Email" + error.response.data.errors.email[0],
-            "Continue"
+            'REGISTERATION FAILED',
+            'Email ' + error.response.data.errors.email[0],
+            'Continue'
           );
         } else {
           showMessageSomethingWentWrong();
@@ -96,10 +103,11 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the userName field",
-                        },
+                          message: 'please fill the userName field'
+                        }
                       })}
                       errorMessage={errors.name ? errors.name : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -112,10 +120,11 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the userName field",
-                        },
+                          message: 'please fill the userName field'
+                        }
                       })}
                       errorMessage={errors.username ? errors.username : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -128,14 +137,15 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the email field",
+                          message: 'please fill the email field'
                         },
                         pattern: {
                           value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                          message: "please enter valid format",
-                        },
+                          message: 'please enter valid format'
+                        }
                       })}
                       errorMessage={errors.email ? errors.email : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -148,14 +158,15 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the password field",
+                          message: 'please fill the password field'
                         },
                         minLength: {
                           value: 6,
-                          message: "minimum 6 character",
-                        },
+                          message: 'minimum 6 character'
+                        }
                       })}
                       errorMessage={errors.password ? errors.password : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -168,18 +179,19 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the confirm password",
+                          message: 'please fill the confirm password'
                         },
                         minLength: {
                           value: 6,
-                          message: "minimum 6 character",
-                        },
+                          message: 'minimum 6 character'
+                        }
                       })}
                       errorMessage={
                         errors.passwordConfirmation
                           ? errors.passwordConfirmation
                           : null
                       }
+                      isDisabled={loading}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
@@ -192,21 +204,28 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: "please fill the Phone Number field",
+                          message: 'please fill the Phone Number field'
                         },
                         pattern: {
                           value: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-                          message: "please enter valid format",
-                        },
+                          message: 'please enter valid format'
+                        }
                       })}
                       errorMessage={
                         errors.phoneNumber ? errors.phoneNumber : null
                       }
+                      isDisabled={loading}
                     />
                   </CInputGroup>
-                  <CButton color="success" type="submit" block>
+                  <div>
+                    <Button
+                      state={loading}
+                      className="button-primary-color w-100"
+                      type="submit"
+                    >
                     Create Account
-                  </CButton>
+                    </Button>
+                  </div>
                 </CForm>
                 <CCol xs="6" className="label-for-register-form">
                   <Link to={ROOT}>

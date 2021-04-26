@@ -23,18 +23,18 @@ module Api
               render json: {user: @user}, status: 200
             end
           rescue JWT::JWKError
-            render json: {error: I18n.t('session.invalid_google_user')}, status: 401
+            render json: {error: I18n.t('devise_token_auth.session.invalid_google_user')}, status: 401
           rescue JWT::DecodeError
-            render json: {error: I18n.t('session.invalid_google_user')}, status: 401
+            render json: {error: I18n.t('devise_token_auth.session.invalid_google_user')}, status: 401
           rescue GoogleIDToken::ValidationError => e
-            render json: {error: I18n.t('session.invalid_google_user')}, status: 401
+            render json: {error: I18n.t('devise_token_auth.session.invalid_google_user')}, status: 401
           end
         end
         
         def facebook_callback
-          render :json => {:error => I18n.t('session.invalid_facebook_user')}, status: 401 and return if params.blank?
+          render :json => {:error => I18n.t('devise_token_auth.session.invalid_facebook_user')}, status: 401 and return if params.blank?
           if params[:error]
-            render :json => {:error => I18n.t('session.invalid_facebook_user')}, status: 401 and return
+            render :json => {:error => I18n.t('devise_token_auth.session.invalid_facebook_user')}, status: 401 and return
           end
           begin
             @graph = Koala::Facebook::API.new(params[:accessToken])
@@ -47,10 +47,10 @@ module Api
                 render json: {user: @user}, status: 200
               end
             else
-              render :json => {:error => I18n.t('session.invalid_facebook_user')}, status: 401 and return
+              render :json => {:error => I18n.t('devise_token_auth.session.invalid_facebook_user')}, status: 401 and return
             end
           rescue Koala::Facebook::AuthenticationError
-            render :json => {:error => I18n.t('session.invalid_facebook_user')}, status: 401 and return
+            render :json => {:error => I18n.t('devise_token_auth.session.invalid_facebook_user')}, status: 401 and return
           end
         end
 

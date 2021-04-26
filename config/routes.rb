@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   mount_devise_token_auth_for 'User' , at: "api/v1/auth",  controllers: {
     registrations: 'api/v1/devise_token_auth/registrations',
     sessions: 'api/v1/devise_token_auth/sessions',
+    confirmations: 'api/v1/devise_token_auth/confirmations',
   }
 
   # Additional Routes for User

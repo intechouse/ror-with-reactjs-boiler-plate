@@ -54,3 +54,39 @@
     margin-bottom:0.25rem !important;
     margin-right: 0.25rem !important;
 }
+.button-primary-color {
+  background-color: #321fdb !important;
+  border-color: #321fdb !important;
+}
+
+.button-spacer {
+  padding-left: 15px;
+}
+
+.react-button-loaders__loading {
+  transform: scaleX(0.5) !important;
+}
+
+.loadingContainer {
+  color: #252919;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.loadingContainer .loadingHeading h3 {
+  text-transform: uppercase;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  color: #252919;
+  cursor: pointer;
+  text-align: center;
+}
+
+.loadingContainer h3 {
+  text-align: center;
+}
+
+.pleaseWait h3 {
+  color: #252919;
+  display: inline-block;
+}
