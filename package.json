@@ -16,6 +16,8 @@
     "@rails/webpacker": "5.2.1",
     "axios": "^0.21.1",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "dotenv": "^8.2.0",
+    "dotenv-webpack": "^7.0.2",
     "mdbreact": "^5.0.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",

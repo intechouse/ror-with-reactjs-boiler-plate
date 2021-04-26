@@ -19,14 +19,8 @@
 }
 
 .inputErrorBorder, .inputErrorBorder:focus{
-    border: 1px solid red;
+    border: 1px solid red !important;
     box-shadow: unset !important;
-}
-
-.inputErrorBorder,
-.inputErrorBorder:focus {
-  border: 1px solid red;
-  box-shadow: unset !important;
 }
 
 .register-card-body {

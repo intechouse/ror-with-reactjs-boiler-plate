@@ -4,17 +4,18 @@ import { CButton } from "@coreui/react";
 import { cibFacebook } from "@coreui/icons";
 import CIcon from "@coreui/icons-react";
 
+
 const Facebook = () => {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setId] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [picture, setPicture] = useState("");
-  // responseFacebook=response=>{
-  //     console.log(response);
+  // const responseFacebook = (response) => {
+  //   console.log("here---",response);
   // }
-  // componentClicked=()=>console.log("clicked");
-
+  // const componentClicked=()=>console.log("clicked=----------------");
   let fbContent;
   if (isLoggedIn) {
     fbContent = null;
