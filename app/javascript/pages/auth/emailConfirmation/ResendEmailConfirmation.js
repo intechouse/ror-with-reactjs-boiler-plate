@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
-  CButton,
   CCard,
   CCardBody,
   CCol,
@@ -11,10 +10,14 @@ import {
   CRow
 } from '@coreui/react';
 import { cibMailRu } from '@coreui/icons';
+import { Beetle as Button } from 'react-button-loaders';
 
 import InputWithIcon from '../../../components/InputWithIcon';
 import { postRequest } from '../../../services/Server';
-import { RESEND_CONFIRMATION, WEBSITE_BASE_URL } from '../../../services/Constants';
+import {
+  RESEND_CONFIRMATION,
+  WEBSITE_BASE_URL
+} from '../../../services/Constants';
 import {
   showMessage,
   sweetAlertWithFailedButton
@@ -26,13 +29,18 @@ const ResendEmailConfirmation = () => {
     reValidateMode: 'onChange',
     shouldFocusError: true
   });
+  const [loading, setLoading] = useState('');
+
   const onSubmit = (data) => {
     data.redirect_url = WEBSITE_BASE_URL + EMAIL_CONFIRMATION_REQUEST;
-    console.log('debugging form data', data);
+    console.log(data);
 
+    setLoading('loading');
     postRequest(RESEND_CONFIRMATION, data)
       .then((result) => {
         console.log('ResendEmailConfirmation, success', result);
+
+        setLoading('finished');
         if (result.data.success) {
           showMessage(
             'success',
@@ -44,6 +52,7 @@ const ResendEmailConfirmation = () => {
       })
       .catch((error) => {
         console.log('ResendEmailConfirmation, error', error.response);
+        setLoading('');
         if (
           error.response &&
           error.response.status === 404 &&
@@ -86,12 +95,18 @@ const ResendEmailConfirmation = () => {
                         }
                       })}
                       errorMessage={errors.email ? errors.email : null}
+                      isDisabled={loading}
                     />
                   </CInputGroup>
-
-                  <CButton type="submit" color="primary" block>
-                    Resend Email
-                  </CButton>
+                  <div>
+                    <Button
+                      state={loading}
+                      className="button-primary-color w-100"
+                      type="submit"
+                    >
+                      Resend Email
+                    </Button>
+                  </div>
                 </CForm>
               </CCardBody>
             </CCard>

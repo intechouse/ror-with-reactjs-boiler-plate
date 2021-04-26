@@ -25,7 +25,7 @@ import {
   showMessageSomethingWentWrong,
   sweetAlertWithFailedButton
 } from '../../director/Helpers';
-import { ROOT } from '../../routes/routing';
+import { EMAIL_CONFIRMATION_REQUEST, ROOT } from '../../routes/routing';
 
 const Register = (props) => {
   const { register, handleSubmit, errors } = useForm({
@@ -43,9 +43,10 @@ const Register = (props) => {
         email: data.email,
         password: data.password,
         password_confirmation: data.passwordConfirmation,
-        username: data.username
+        username: data.username,
+        mobile: data.phoneNumber
       },
-      confirm_success_url: WEBSITE_BASE_URL + '/email-confirmation'
+      confirm_success_url: WEBSITE_BASE_URL + EMAIL_CONFIRMATION_REQUEST
     };
     setLoading('loading');
 
@@ -74,7 +75,7 @@ const Register = (props) => {
         ) {
           sweetAlertWithFailedButton(
             'REGISTERATION FAILED',
-            'Email' + error.response.data.errors.email[0],
+            'Email ' + error.response.data.errors.email[0],
             'Continue'
           );
         } else {
