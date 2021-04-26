@@ -69,7 +69,8 @@ const Register = (props) => {
         if (
           error.response &&
           error.response.status === 422 &&
-          error.response.data.errors
+          error.response.data.errors &&
+          error.response.data.errors.email
         ) {
           sweetAlertWithFailedButton(
             'REGISTERATION FAILED',

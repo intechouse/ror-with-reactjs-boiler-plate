@@ -21,12 +21,12 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: localhost
-  username: <%= Rails.application.credentials.database.dig(:username) %>
-  password: <%= Rails.application.credentials.database.dig(:password) %>
+  username: postgres
+  password: postgres
 
 development:
   <<: *default
-  database: <%= Rails.application.credentials.database.dig(:name) %>
+  database: boiler_plate
 
 staging:
   <<: *default
