@@ -77,7 +77,11 @@ const ForgotPassword = (props) => {
       .catch((error) => {
         console.log('Forgot Passord, error', error.response);
         setLoading('');
-        if (error.response.status === 422 && error.response.data && error.response.data.errors) {
+        if (
+          error.response.status === 422 &&
+          error.response.data &&
+          error.response.data.errors
+        ) {
           if (error.response.data.errors.full_messages) {
             sweetAlertWithFailedButton(
               'PASSWORD RESET FAILED',
@@ -151,7 +155,7 @@ const ForgotPassword = (props) => {
                     />
                   </CInputGroup>
 
-                  <div>
+                  <div className="button-container">
                     <Button
                       state={loading}
                       className="button-primary-color w-100"

@@ -94,13 +94,13 @@ const ForgotPassword = () => {
                     />
                   </CInputGroup>
 
-                  <div>
+                  <div className="button-container">
                     <Button
                       state={loading}
                       className="button-primary-color w-100"
                       type="submit"
                     >
-                    Reset Password
+                      Reset Password
                     </Button>
                   </div>
                 </CForm>
