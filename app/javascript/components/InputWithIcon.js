@@ -37,7 +37,7 @@ const Input = (props) => {
         placeholder={props.placeholder}
         ref={props.inputReference}
       />
-      <CCol md="12">
+      <CCol md="12" className="error-space">
         {errors
           ? (
             <>
@@ -47,8 +47,8 @@ const Input = (props) => {
                 content={freeSet.cilWarning}
                 alt="Settings"
               />
-              <CCol md="8" className="error">
-                {errors}
+              <CCol md="8" className='error'>
+                <p>{errors}</p>
               </CCol>
             </>
           )

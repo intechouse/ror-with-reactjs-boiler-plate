@@ -17,7 +17,10 @@
   color: red !important;
   display: inline;
 }
-
+.error-space{
+  display: inherit;
+  padding-top: 5px;
+}
 .inputErrorBorder, .inputErrorBorder:focus{
     border: 1px solid red !important;
     box-shadow: unset !important;
