@@ -29,7 +29,7 @@ ActiveAdmin.register User do
       row :mobile
       row :profile_image do
         div do
-          image_tag url_for(user.profile_image), size: "100x100"
+          image_tag url_for(user.profile_image), size: "100x100" if user.profile_image.attached?
         end
       end
     end
