@@ -4,6 +4,7 @@ import {
   CCard,
   CCardBody,
   CCol,
+  CButton,
   CContainer,
   CForm,
   CInputGroup,
@@ -11,6 +12,7 @@ import {
 } from '@coreui/react';
 import { cibMailRu } from '@coreui/icons';
 import { Beetle as Button } from 'react-button-loaders';
+import { Link } from 'react-router-dom';
 
 import InputWithIcon from '../../../components/InputWithIcon';
 import { postRequest } from '../../../services/Server';
@@ -22,7 +24,11 @@ import {
   showMessage,
   sweetAlertWithFailedButton
 } from '../../../director/Helpers';
-import { EMAIL_CONFIRMATION_REQUEST } from '../../../routes/routing';
+import {
+  EMAIL_CONFIRMATION_REQUEST,
+  FORGOT_PASSWORD,
+  ROOT
+} from '../../../routes/routing';
 
 const ResendEmailConfirmation = () => {
   const { register, handleSubmit, errors } = useForm({
@@ -98,7 +104,7 @@ const ResendEmailConfirmation = () => {
                       isDisabled={loading}
                     />
                   </CInputGroup>
-                  <div>
+                  <div className="mb-3">
                     <Button
                       state={loading}
                       className="button-primary-color w-100"
@@ -107,6 +113,22 @@ const ResendEmailConfirmation = () => {
                       Resend Email
                     </Button>
                   </div>
+
+                  <CCol xs="6" className="label-for-register-form">
+                    <Link to={FORGOT_PASSWORD}>
+                      <CButton color="link" className="px-0">
+                        Forgot password?
+                      </CButton>
+                    </Link>
+                  </CCol>
+
+                  <CCol xs="6" className="label-for-register-form">
+                    <Link to={ROOT}>
+                      <CButton color="link" className="px-0">
+                        Already Have An Account?
+                      </CButton>
+                    </Link>
+                  </CCol>
                 </CForm>
               </CCardBody>
             </CCard>
