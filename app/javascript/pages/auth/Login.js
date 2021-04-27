@@ -57,10 +57,7 @@ const Login = (props) => {
         console.log('Login success', result, isSignedIn, currentUser);
 
         setLoading('finished');
-        showMessageAutoHide('success', 'LOGIN SUCCESS!', 'Login Success');
-        setTimeout(() => {
-          props.history.replace(HOME);
-        }, 1000);
+        props.history.replace(HOME);
       })
       .catch((error) => {
         console.log('Login error', error.response, isSignedIn, currentUser);
