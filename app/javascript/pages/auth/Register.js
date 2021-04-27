@@ -103,7 +103,7 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the userName field'
+                          message: 'Name is required'
                         }
                       })}
                       errorMessage={errors.name ? errors.name : null}
@@ -120,7 +120,7 @@ const Register = (props) => {
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the userName field'
+                          message: ' UserName is required'
                         }
                       })}
                       errorMessage={errors.username ? errors.username : null}
@@ -131,17 +131,17 @@ const Register = (props) => {
                     <InputWithIcon
                       type="email"
                       name="email"
-                      autoComplete="name"
+                      autoComplete="email"
                       icon={cibMailRu}
-                      placeholder="Email address"
+                      placeholder="Enter your email"
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the email field'
+                          message: 'Email is required'
                         },
                         pattern: {
                           value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                          message: 'please enter valid format'
+                          message: 'Email is invalid'
                         }
                       })}
                       errorMessage={errors.email ? errors.email : null}
@@ -152,17 +152,17 @@ const Register = (props) => {
                     <InputWithIcon
                       type="password"
                       name="password"
-                      autoComplete="password"
-                      placeholder="Enter your Password"
+                      autoComplete="off"
+                      placeholder="Enter your password"
                       icon={freeSet.cilLockLocked}
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the password field'
+                          message: 'Password is required'
                         },
                         minLength: {
                           value: 6,
-                          message: 'minimum 6 character'
+                          message: 'Password length should be minimum 6'
                         }
                       })}
                       errorMessage={errors.password ? errors.password : null}
@@ -174,16 +174,16 @@ const Register = (props) => {
                       type="password"
                       name="passwordConfirmation"
                       autoComplete="off"
-                      placeholder="confirm password"
+                      placeholder="Confirm password"
                       icon={freeSet.cilLockLocked}
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the confirm password'
+                          message: 'Password is required'
                         },
                         minLength: {
                           value: 6,
-                          message: 'minimum 6 character'
+                          message: 'Password length should be minimum 6'
                         }
                       })}
                       errorMessage={
@@ -199,16 +199,16 @@ const Register = (props) => {
                       type="tel"
                       name="phoneNumber"
                       autoComplete="off"
-                      placeholder="Phone Number"
+                      placeholder="Enter phone number"
                       icon={freeSet.cilPhone}
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the Phone Number field'
+                          message: 'Number is required'
                         },
                         pattern: {
                           value: /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-                          message: 'please enter valid format'
+                          message: 'Number is Invalid'
                         }
                       })}
                       errorMessage={

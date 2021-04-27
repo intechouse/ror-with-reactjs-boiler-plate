@@ -109,17 +109,17 @@ const ForgotPassword = (props) => {
                     <InputWithIcon
                       type="password"
                       name="password"
-                      autoComplete="password"
+                      autoComplete="off"
                       placeholder="Enter your Password"
                       icon={freeSet.cilLockLocked}
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the password field'
+                          message: 'Password is required'
                         },
                         minLength: {
                           value: 6,
-                          message: 'minimum 6 character'
+                          message: 'Password length should be minimum 6'
                         }
                       })}
                       errorMessage={errors.password ? errors.password : null}
@@ -131,16 +131,16 @@ const ForgotPassword = (props) => {
                       type="password"
                       name="password_confirmation"
                       autoComplete="off"
-                      placeholder="confirm password"
+                      placeholder="Confirm password"
                       icon={freeSet.cilLockLocked}
                       inputReference={register({
                         required: {
                           value: true,
-                          message: 'please fill the confirm password'
+                          message: 'Password is required'
                         },
                         minLength: {
                           value: 6,
-                          message: 'minimum 6 character'
+                          message: 'Password length should be minimum 6'
                         }
                       })}
                       errorMessage={
