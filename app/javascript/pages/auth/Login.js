@@ -17,15 +17,13 @@ import {
 import { cibMailRu, freeSet } from '@coreui/icons';
 import { Beetle as Button } from 'react-button-loaders';
 
-import InputWithIcon from "../../components/InputWithIcon";
-import Facebook from "../../components/socialsLogin/Facebook";
-import Google from "../../components/socialsLogin/Google";
-import InstaGram from "../../components/socialsLogin/InstaGram"
-
-
+import InputWithIcon from '../../components/InputWithIcon';
+import Facebook from '../../components/socialsLogin/Facebook';
+import Google from '../../components/socialsLogin/Google';
+import InstaGram from '../../components/socialsLogin/InstaGram';
 
 // import Register from "./Register";
-import { signInUser } from "../../store/redux-token-auth-config";
+import { signInUser } from '../../store/redux-token-auth-config';
 import {
   isLoggedInSelector,
   getCurrentUser
@@ -162,8 +160,8 @@ const Login = (props) => {
                       </CCol>
 
                     </CRow>
-                    <CRow className="mt-1"> 
-                    <CCol xs="12">
+                    <CRow className="mt-1">
+                      <CCol xs="12">
                         <Link to={RESEND_EMAIL_CONFIRMATION}>
                           <CButton color="link" className="px-0">
                             Resend Email Confirmation
@@ -172,13 +170,13 @@ const Login = (props) => {
                       </CCol>
                       <CRow className="mt-3">
                         <CCol xs="12">
-                        <Facebook />
-                      </CCol>
-                      <CCol xs="12" >
-                        <Google />
-                      </CCol>
-                      <CCol xs="12" >
-                        <InstaGram />
+                          <Facebook />
+                        </CCol>
+                        <CCol xs="12" >
+                          <Google />
+                        </CCol>
+                        <CCol xs="12" >
+                          <InstaGram />
                         </ CCol>
                       </CRow>
                     </CRow>
