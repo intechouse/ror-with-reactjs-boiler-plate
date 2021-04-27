@@ -138,7 +138,7 @@ const Login = (props) => {
                         </CInputGroup>
                       </CCol>
                     </CFormGroup>
-                    <div>
+                    <div className="button-container">
                       <Button
                         state={loading}
                         className="button-primary-color w-100"

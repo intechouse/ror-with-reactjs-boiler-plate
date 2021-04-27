@@ -100,7 +100,7 @@ const ForgotPassword = () => {
                     />
                   </CInputGroup>
 
-                  <div className="mb-3">
+                  <div className="button-container mb-3">
                     <Button
                       state={loading}
                       className="button-primary-color w-100"

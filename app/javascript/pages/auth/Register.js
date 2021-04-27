@@ -217,7 +217,7 @@ const Register = (props) => {
                       isDisabled={loading}
                     />
                   </CInputGroup>
-                  <div>
+                  <div className="button-container">
                     <Button
                       state={loading}
                       className="button-primary-color w-100"
