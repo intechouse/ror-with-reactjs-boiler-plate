@@ -8,7 +8,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   before_validation :set_uid #, :decrypt_para
   has_one_attached :profile_image
-  
+  validates :name, presence: true
+  validates :name, length: { minimum: 3 }
+  validates :username, presence: true
+  validates :username, length: { minimum: 3 }
+  validates :username, uniqueness: true
+  validates :mobile, uniqueness: true
+
   def self.verify_google_login(wc:, email:, uid:)
     begin
       validator = GoogleIDToken::Validator.new
