@@ -169,7 +169,7 @@ const Register = (props) => {
                       isDisabled={loading}
                     />
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
+                  <CInputGroup className="mb-3">
                     <InputWithIcon
                       type="password"
                       name="passwordConfirmation"
@@ -194,7 +194,7 @@ const Register = (props) => {
                       isDisabled={loading}
                     />
                   </CInputGroup>
-                  <CInputGroup className="mb-4">
+                  <CInputGroup className="mb-3">
                     <InputWithIcon
                       type="tel"
                       name="phoneNumber"
