@@ -57,10 +57,7 @@ const Login = (props) => {
         console.log('Login success', result, isSignedIn, currentUser);
 
         setLoading('finished');
-        showMessageAutoHide('success', 'LOGIN SUCCESS!', 'Login Success');
-        setTimeout(() => {
-          props.history.replace(HOME);
-        }, 1000);
+        props.history.replace(HOME);
       })
       .catch((error) => {
         console.log('Login error', error.response, isSignedIn, currentUser);
@@ -95,17 +92,17 @@ const Login = (props) => {
                           <InputWithIcon
                             type="email"
                             name="email"
-                            autoComplete="name"
+                            autoComplete="email"
                             icon={cibMailRu}
-                            placeholder="Enter your name"
+                            placeholder="Enter your email"
                             inputReference={register({
                               required: {
                                 value: true,
-                                message: 'please fill the email field'
+                                message: 'Email is required'
                               },
                               pattern: {
                                 value: /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                                message: 'please enter valid format'
+                                message: 'Email  is invalid'
                               }
                             })}
                             errorMessage={errors.email ? errors.email : null}
@@ -120,17 +117,17 @@ const Login = (props) => {
                           <InputWithIcon
                             type="password"
                             name="password"
-                            autoComplete="password"
-                            placeholder="Enter your Password"
+                            autoComplete="off"
+                            placeholder="Enter your password"
                             icon={freeSet.cilLockLocked}
                             inputReference={register({
                               required: {
                                 value: true,
-                                message: 'please fill the password field'
+                                message: 'Password is required'
                               },
                               minLength: {
                                 value: 6,
-                                message: 'minimum 6 character'
+                                message: 'Password length should be minimum 6'
                               }
                             })}
                             errorMessage={

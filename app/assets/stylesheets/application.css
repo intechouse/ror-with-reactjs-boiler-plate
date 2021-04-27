@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ 
 .error {
   color: red !important;
   display: inline;
@@ -50,12 +51,14 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .btn-google-plus {
   background-color: #d34836;
   color: white;
   margin-bottom: 0.25rem !important;
   margin-right: 0.25rem !important;
 }
+
 .button-primary-color {
   background-color: #321fdb !important;
   border-color: #321fdb !important;
